@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const menu = [
   { name: "HOME", path: "/" },
@@ -26,6 +26,11 @@ function Logo() {
 
 function Navbar() {
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="site-header">
@@ -48,11 +53,37 @@ function Navbar() {
           <Link to="/contact" className="gold-btn small">
             GET QUOTE
           </Link>
-          <button className="menu-circle" aria-label="Open menu">
-            <Menu size={24} />
+          <button
+            className="menu-circle"
+            type="button"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
+
+      <nav
+        id="mobile-navigation"
+        className={`mobile-nav ${isMenuOpen ? "open" : ""}`}
+        aria-label="Mobile navigation"
+      >
+        {menu.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={location.pathname === item.path ? "active" : ""}
+          >
+            {item.name}
+          </Link>
+        ))}
+        <Link to="/contact" className="gold-btn small mobile-quote">
+          GET QUOTE
+        </Link>
+      </nav>
     </header>
   );
 }
