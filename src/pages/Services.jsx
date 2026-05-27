@@ -1,9 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { images, processSteps, services } from "../content";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { ArrowRight, X } from "lucide-react";
+import { db } from "../firebase";
+import { icons, images, processSteps, services as defaultServices } from "../content";
+
+function normalizeService(item, index = 0) {
+  return {
+    id: item.id || item.title,
+    icon: typeof item.icon === "string" ? item.icon : item.icon?.displayName || "PackageCheck",
+    title: item.title || "",
+    thai: item.thai || "",
+    desc: item.desc || "",
+    details: item.details || item.desc || "",
+    image: item.image || images.kitchen,
+    order: Number(item.order ?? index + 1),
+    isActive: item.isActive !== false,
+  };
+}
+
+function getIcon(name) {
+  return icons[name] || icons.PackageCheck;
+}
 
 function Services() {
+  const [firebaseServices, setFirebaseServices] = React.useState([]);
+  const [selectedService, setSelectedService] = React.useState(null);
+
+  React.useEffect(() => {
+    const servicesQuery = query(collection(db, "services"), orderBy("order", "asc"));
+
+    return onSnapshot(
+      servicesQuery,
+      (snapshot) => {
+        setFirebaseServices(snapshot.docs.map((doc) => normalizeService({ id: doc.id, ...doc.data() })));
+      },
+      (error) => {
+        console.error("Could not load services", error);
+      },
+    );
+  }, []);
+
+  const serviceItems = (firebaseServices.length > 0 ? firebaseServices : defaultServices.map(normalizeService))
+    .filter((item) => item.isActive)
+    .sort((a, b) => a.order - b.order);
+
+  const activeService = selectedService || serviceItems[0];
+
   return (
     <main className="page">
       <section className="hero sub-hero service-hero">
@@ -13,26 +56,32 @@ function Services() {
           <div>
             <p className="eyebrow">OUR SERVICES</p>
             <h1>Complete Built-in<br />Solutions for Every Space</h1>
-            <h2>บริการออกแบบและผลิตเฟอร์นิเจอร์บิวท์อิน ครบวงจร</h2>
+            <h2>บริการออกแบบและผลิตเฟอร์นิเจอร์บิวท์อินครบวงจร</h2>
             <div className="gold-line" />
             <p className="lead">
               เราดูแลทุกขั้นตอน ตั้งแต่ให้คำปรึกษา ออกแบบ 3D ผลิตด้วยวัสดุคุณภาพสูง
-              ติดตั้งโดยทีมงานมืออาชีพ เพื่อให้คุณได้พื้นที่ที่สวยงาม ใช้งานได้จริง
+              และติดตั้งโดยทีมงานมืออาชีพ เพื่อให้คุณได้พื้นที่ที่สวยงามและใช้งานได้จริง
             </p>
-            <Link to="/contact" className="outline-btn">ปรึกษาฟรี / รับใบเสนอราคา <ArrowRight size={18} /></Link>
+            <Link to="/contact" className="outline-btn">
+              ปรึกษาฟรี / รับใบเสนอราคา <ArrowRight size={18} />
+            </Link>
           </div>
 
           <div className="hero-feature-card compact">
-            {services.slice(0, 4).map((item) => {
-              const Icon = item.icon;
+            {serviceItems.slice(0, 4).map((item) => {
+              const Icon = getIcon(item.icon);
               return (
-                <div className="feature-row" key={item.title}>
+                <button
+                  className="feature-row service-feature-button"
+                  key={item.id}
+                  onClick={() => setSelectedService(item)}
+                >
                   <Icon />
                   <div>
                     <strong>{item.title}</strong>
                     <p>{item.thai}</p>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -40,15 +89,22 @@ function Services() {
       </section>
 
       <section className="site-shell section-block">
-        <div className="section-title">
-          <p className="eyebrow">OUR SERVICES</p>
-          <h2>บริการของเรา</h2>
+        <div className="section-title with-action">
+          <div>
+            <p className="eyebrow">OUR SERVICES</p>
+            <h2>บริการของเรา</h2>
+          </div>
+          <p className="section-note">คลิกการ์ดบริการเพื่อดูรายละเอียดเพิ่มเติม</p>
         </div>
         <div className="service-grid">
-          {services.map((item) => {
-            const Icon = item.icon;
+          {serviceItems.map((item) => {
+            const Icon = getIcon(item.icon);
             return (
-              <article className="service-card" key={item.title}>
+              <button
+                className="service-card service-card-button"
+                key={item.id}
+                onClick={() => setSelectedService(item)}
+              >
                 <img src={item.image} alt="" />
                 <div>
                   <Icon />
@@ -56,10 +112,28 @@ function Services() {
                   <h3>{item.thai}</h3>
                   <p>{item.desc}</p>
                 </div>
-              </article>
+              </button>
             );
           })}
         </div>
+
+        {activeService && (
+          <article className="service-detail-panel">
+            <button className="service-detail-close" onClick={() => setSelectedService(null)} aria-label="ปิดรายละเอียด">
+              <X size={18} />
+            </button>
+            <img src={activeService.image} alt="" />
+            <div>
+              <p className="eyebrow">SERVICE DETAIL</p>
+              <h2>{activeService.thai}</h2>
+              <span>{activeService.title}</span>
+              <p>{activeService.details || activeService.desc}</p>
+              <Link to="/contact" className="gold-btn">
+                สนใจบริการนี้ <ArrowRight size={18} />
+              </Link>
+            </div>
+          </article>
+        )}
       </section>
 
       <section className="site-shell process-line-section">
@@ -86,7 +160,9 @@ function Services() {
           <h2>Ready to Transform Your Space?</h2>
           <p>ให้เราช่วยออกแบบพื้นที่ในฝันของคุณ พร้อมคำแนะนำจากทีมงานมืออาชีพ</p>
         </div>
-        <Link to="/contact" className="gold-btn">ติดต่อเราเลย <ArrowRight size={18} /></Link>
+        <Link to="/contact" className="gold-btn">
+          ติดต่อเราเลย <ArrowRight size={18} />
+        </Link>
       </section>
     </main>
   );

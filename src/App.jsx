@@ -11,6 +11,7 @@ import Portfolio from "./pages/Portfolio";
 import Process from "./pages/Process";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/process" element={<Process />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
 
       <Footer />

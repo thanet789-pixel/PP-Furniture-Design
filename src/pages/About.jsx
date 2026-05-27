@@ -1,15 +1,57 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { ArrowRight } from "lucide-react";
 import { images, processSteps, stats, values } from "../content";
+import { db } from "../firebase";
+
+const defaultTeam = [
+  { role: "DESIGNER", name: "ออกแบบ 3D", image: images.team, order: 1, isActive: true },
+  { role: "PROJECT MANAGER", name: "ควบคุมงาน", image: images.team, order: 2, isActive: true },
+  { role: "PRODUCTION TEAM", name: "ทีมผลิต", image: images.team, order: 3, isActive: true },
+  { role: "INSTALLATION TEAM", name: "ทีมติดตั้ง", image: images.team, order: 4, isActive: true },
+];
+
+function normalizeTeamMember(member, index = 0) {
+  return {
+    id: member.id || member.role || String(index),
+    role: member.role || "",
+    name: member.name || "",
+    image: member.image || images.team,
+    order: Number(member.order ?? index + 1),
+    isActive: member.isActive !== false,
+  };
+}
 
 function About() {
-  const team = [
+  const fallbackTeam = [
     ["DESIGNER", "ออกแบบ 3D"],
     ["PROJECT MANAGER", "ควบคุมงาน"],
     ["PRODUCTION TEAM", "ทีมผลิต"],
     ["INSTALLATION TEAM", "ทีมติดตั้ง"],
   ];
+
+  const [firebaseTeam, setFirebaseTeam] = React.useState([]);
+
+  React.useEffect(() => {
+    const teamQuery = query(collection(db, "teamMembers"), orderBy("order", "asc"));
+
+    return onSnapshot(
+      teamQuery,
+      (snapshot) => {
+        setFirebaseTeam(snapshot.docs.map((teamDoc) => normalizeTeamMember({ id: teamDoc.id, ...teamDoc.data() })));
+      },
+      (error) => {
+        console.error("Could not load team members", error);
+      },
+    );
+  }, []);
+
+  const team = (firebaseTeam.length > 0
+    ? firebaseTeam
+    : fallbackTeam.map(([role, name], index) => normalizeTeamMember({ role, name, image: images.team }, index)))
+    .filter((member) => member.isActive)
+    .sort((a, b) => a.order - b.order);
 
   return (
     <main className="page">
@@ -106,11 +148,11 @@ function About() {
           <p className="eyebrow">OUR TEAM</p>
           <h2>ทีมงานของเรา</h2>
           <div className="team-grid">
-            {team.map(([role, name]) => (
-              <article key={role}>
-                <img src={images.team} alt="" />
-                <span>{role}</span>
-                <strong>{name}</strong>
+            {team.map((member) => (
+              <article key={member.id}>
+                <img src={member.image} alt={member.name || member.role} />
+                <span>{member.role}</span>
+                <strong>{member.name}</strong>
               </article>
             ))}
           </div>

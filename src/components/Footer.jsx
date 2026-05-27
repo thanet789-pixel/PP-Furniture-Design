@@ -4,6 +4,9 @@ import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Youtube } from
 import { Logo } from "./Navbar";
 import { images } from "../content";
 
+const mapCoordinates = "13.550896390570566,100.699127645502";
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${mapCoordinates}`;
+
 function Footer() {
   const quickLinks = [
     ["Home", "/"],
@@ -22,13 +25,15 @@ function Footer() {
         <div className="footer-brand">
           <Logo />
           <p>
-            รับออกแบบและผลิตเฟอร์นิเจอร์บิวท์อินครบวงจร สำหรับบ้าน คอนโด และอาคารสำนักงาน
-            ด้วยทีมงานมืออาชีพ และวัสดุคุณภาพสูง
+            PP Home Furniture & Design โดย บริษัท เพิ่มพูน รุ่งเรือง เฟอร์นิเจอร์ จำกัด
+            รับออกแบบ ผลิต และติดตั้งเฟอร์นิเจอร์บิวท์อินครบวงจร ด้วยดีไซน์ทันสมัยและงานคุณภาพ
           </p>
           <div className="social-row">
+            <a href="https://line.me/R/ti/p/@ppfurniture" target="_blank" rel="noreferrer" aria-label="LINE @ppfurniture">
+              <MessageCircle size={17} />
+            </a>
             <Facebook size={17} />
             <Instagram size={17} />
-            <MessageCircle size={17} />
             <Youtube size={17} />
           </div>
         </div>
@@ -47,10 +52,18 @@ function Footer() {
         <div>
           <h3>CONTACT US</h3>
           <div className="contact-list">
-            <p><Phone size={16} /> 02-123-4567</p>
-            <p><Mail size={16} /> info@pphomefurniture.com</p>
-            <p><MessageCircle size={16} /> @pphome</p>
-            <p><MapPin size={16} /> 88/8 ถนนกาญจนาภิเษก บางบัวทอง นนทบุรี 11110</p>
+            <a href="tel:0880904970"><Phone size={16} /> 088-090-4970</a>
+            <a href="mailto:permphun@gmail.com"><Mail size={16} /> permphun@gmail.com</a>
+            <a href="https://line.me/R/ti/p/@ppfurniture" target="_blank" rel="noreferrer">
+              <MessageCircle size={16} /> @ppfurniture
+            </a>
+            <a href={mapUrl} target="_blank" rel="noreferrer">
+              <MapPin size={16} />
+              <span>
+                9/89, 9/98 หมู่ 2 ต.แพรกษาใหม่<br />
+                อ.เมืองสมุทรปราการ จ.สมุทรปราการ 10280
+              </span>
+            </a>
           </div>
         </div>
 
@@ -65,8 +78,8 @@ function Footer() {
       </div>
 
       <div className="site-shell footer-bottom">
-        <span>© 2024 PP HOME FURNITURE. All Rights Reserved.</span>
-        <span>Privacy Policy <b>|</b> Terms of Service</span>
+        <span>© 2026 PP Home Furniture & Design. All Rights Reserved.</span>
+        <span>Tax ID 0115566016170 <b>|</b> Permphun Rungrung Furniture Co., Ltd.</span>
       </div>
     </footer>
   );
