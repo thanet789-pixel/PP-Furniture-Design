@@ -7,7 +7,7 @@ function Home() {
   return (
     <main>
       <section className="hero home-hero">
-        <img src={images.kitchen} alt="" className="hero-bg" />
+        <img src="/images/home/home-hero.png" alt="" className="hero-bg home-hero-bg" />
         <div className="hero-shade" />
 
         <div className="site-shell hero-content home-layout">

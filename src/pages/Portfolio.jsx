@@ -17,18 +17,41 @@ const filters = [
   "WORKSPACE",
 ];
 
+const localPortfolioImages = {
+  KITCHEN: "/images/portfolio/kitchen.png",
+  WARDROBE: "/images/portfolio/wardrobe.png",
+  "LIVING ROOM": "/images/portfolio/living-room.png",
+  BEDROOM: "/images/portfolio/bedroom.png",
+  WORKSPACE: "/images/portfolio/home-office.png",
+  HOUSE: "/images/portfolio/house.png",
+  CONDOMINIUM: "/images/portfolio/condo.png",
+  RESIDENTIAL: "/images/portfolio/workspace.png",
+};
+
+function getPortfolioImage(item) {
+  if (item.image && !item.image.includes("images.unsplash.com")) {
+    return item.image;
+  }
+
+  return localPortfolioImages[item.category] || images.kitchen;
+}
+
 function normalizePortfolioItem(item, index = 0) {
+  const fallbackItem = defaultPortfolioItems.find(
+    (portfolioItem) => portfolioItem.title === item.title || portfolioItem.category === item.category,
+  );
+
   return {
     id: item.id || item.title,
     category: item.category || "RESIDENTIAL",
     title: item.title || "",
     thai: item.thai || "",
     style: item.style || "",
-    desc: item.desc || item.details || "",
-    details: item.details || item.desc || "",
+    desc: item.desc || item.details || fallbackItem?.desc || "",
+    details: item.details || item.desc || fallbackItem?.details || fallbackItem?.desc || "",
     location: item.location || "",
     year: item.year || "",
-    image: item.image || images.kitchen,
+    image: getPortfolioImage(item),
     order: Number(item.order ?? index + 1),
     isActive: item.isActive !== false,
   };
@@ -68,7 +91,7 @@ function Portfolio() {
   return (
     <main className="page">
       <section className="hero sub-hero portfolio-hero">
-        <img src={images.kitchen} alt="" className="hero-bg" />
+        <img src="/images/portfolio/kitchen.png" alt="" className="hero-bg" />
         <div className="hero-shade" />
         <div className="site-shell hero-content">
           <p className="eyebrow">OUR PORTFOLIO</p>

@@ -7,16 +7,13 @@ import {
   CalendarDays,
   Clock,
   Search,
+  X,
 } from "lucide-react";
 
 import {
-  Link,
-} from "react-router-dom";
-
-import {
-  blogPosts,
   images,
 } from "../content";
+import { blogPosts } from "../blogContent";
 
 function Blog() {
 
@@ -34,6 +31,9 @@ function Blog() {
 
   const [searchTerm, setSearchTerm] =
     useState("");
+
+  const [selectedPost, setSelectedPost] =
+    useState(null);
 
   const filteredPosts = useMemo(() => {
 
@@ -101,9 +101,10 @@ function Blog() {
 
                 <button
                   key={item}
-                  onClick={() =>
-                    setActiveFilter(item)
-                  }
+                  onClick={() => {
+                    setActiveFilter(item);
+                    setSelectedPost(null);
+                  }}
                   className={
                     activeFilter === item
                       ? "active"
@@ -136,14 +137,48 @@ function Blog() {
 
         </div>
 
+        {selectedPost && (
+          <article className="blog-inline-detail">
+            <button
+              className="service-detail-close"
+              onClick={() => setSelectedPost(null)}
+              aria-label="ปิดบทความ"
+            >
+              <X size={18} />
+            </button>
+
+            <img src={selectedPost.image} alt={selectedPost.title} />
+
+            <div>
+              <p className="eyebrow">{selectedPost.category}</p>
+              <h2>{selectedPost.title}</h2>
+              <div className="blog-detail-meta">
+                <span>
+                  <CalendarDays size={16} />
+                  {selectedPost.date}
+                </span>
+                <span>
+                  <Clock size={16} />
+                  {selectedPost.read}
+                </span>
+              </div>
+              <p className="blog-detail-lead">{selectedPost.excerpt}</p>
+              {selectedPost.content.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </article>
+        )}
+
         <div className="blog-grid">
 
           {filteredPosts.map((post) => (
 
-            <Link
-              to={`/blog/${post.id}`}
+            <button
+              type="button"
               className="blog-card"
               key={post.id}
+              onClick={() => setSelectedPost(post)}
             >
 
               <img
@@ -161,6 +196,10 @@ function Blog() {
                   {post.title}
                 </h3>
 
+                <p className="blog-excerpt">
+                  {post.excerpt}
+                </p>
+
                 <p>
 
                   <CalendarDays size={14} />
@@ -173,9 +212,13 @@ function Blog() {
 
                 </p>
 
+                <strong className="blog-read-more">
+                  อ่านบทความ
+                </strong>
+
               </div>
 
-            </Link>
+            </button>
 
           ))}
 
