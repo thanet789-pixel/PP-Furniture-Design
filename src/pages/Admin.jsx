@@ -7,6 +7,7 @@ import {
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
@@ -14,7 +15,7 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { Edit3, LogOut, Mail, Phone, Plus, RefreshCw, ShieldCheck } from "lucide-react";
+import { Edit3, LogOut, Mail, Phone, Plus, RefreshCw, ShieldCheck, Trash2 } from "lucide-react";
 import { auth, db } from "../firebase";
 import {
   icons,
@@ -424,6 +425,66 @@ function Admin() {
     }
   };
 
+  const handleDeleteService = async (id, title) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบบริการ "${title}" อย่างถาวร?`)) {
+      return;
+    }
+    setError("");
+    setNotice("");
+    try {
+      await deleteDoc(doc(db, "services", id));
+      setNotice("ลบบริการเรียบร้อยแล้ว");
+    } catch (err) {
+      console.error("Could not delete service", err);
+      setError("ลบบริการไม่สำเร็จ กรุณาตรวจสอบ Firestore Rules");
+    }
+  };
+
+  const handleDeletePortfolio = async (id, title) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบผลงาน "${title}" อย่างถาวร?`)) {
+      return;
+    }
+    setError("");
+    setNotice("");
+    try {
+      await deleteDoc(doc(db, "portfolio", id));
+      setNotice("ลบผลงานเรียบร้อยแล้ว");
+    } catch (err) {
+      console.error("Could not delete portfolio", err);
+      setError("ลบผลงานไม่สำเร็จ กรุณาตรวจสอบ Firestore Rules");
+    }
+  };
+
+  const handleDeleteTeam = async (id, name) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบทีมงาน "${name}" อย่างถาวร?`)) {
+      return;
+    }
+    setError("");
+    setNotice("");
+    try {
+      await deleteDoc(doc(db, "teamMembers", id));
+      setNotice("ลบทีมงานเรียบร้อยแล้ว");
+    } catch (err) {
+      console.error("Could not delete team member", err);
+      setError("ลบทีมงานไม่สำเร็จ กรุณาตรวจสอบ Firestore Rules");
+    }
+  };
+
+  const handleDeleteMessage = async (id, clientName) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบข้อความของ "${clientName}"?`)) {
+      return;
+    }
+    setError("");
+    setNotice("");
+    try {
+      await deleteDoc(doc(db, "contactMessages", id));
+      setNotice("ลบข้อความเรียบร้อยแล้ว");
+    } catch (err) {
+      console.error("Could not delete message", err);
+      setError("ลบข้อความไม่สำเร็จ กรุณาตรวจสอบ Firestore Rules");
+    }
+  };
+
   const handleSeedServices = async () => {
     setError("");
     setNotice("");
@@ -638,7 +699,18 @@ function Admin() {
                         <h3>{message.name || "ไม่ระบุชื่อ"}</h3>
                         <p>{formatDate(message.createdAt)}</p>
                       </div>
-                      <span>{message.service || "ไม่ระบุบริการ"}</span>
+                      <div className="flex items-center gap-3">
+                        <span>{message.service || "ไม่ระบุบริการ"}</span>
+                        <button
+                          type="button"
+                          className="p-1.5 text-red-400 hover:text-red-500 hover:bg-red-500/10 rounded-full transition-colors"
+                          onClick={() => handleDeleteMessage(message.id, message.name)}
+                          aria-label="ลบข้อความ"
+                          title="ลบข้อความ"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                     <div className="admin-contact-lines">
                       <a href={`tel:${message.phone || ""}`}>
@@ -734,9 +806,18 @@ function Admin() {
                         <span>{service.title} · ลำดับ {service.order || 1}</span>
                         <p>{service.desc}</p>
                       </div>
-                      <button type="button" className="outline-btn" onClick={() => handleEditService(service)}>
-                        <Edit3 size={16} /> แก้ไข
-                      </button>
+                      <div className="flex gap-2">
+                        <button type="button" className="outline-btn" onClick={() => handleEditService(service)}>
+                          <Edit3 size={16} /> แก้ไข
+                        </button>
+                        <button
+                          type="button"
+                          className="outline-btn text-red-400 border-red-500/20 hover:bg-red-500/10 hover:text-red-500"
+                          onClick={() => handleDeleteService(service.id, service.thai)}
+                        >
+                          <Trash2 size={16} /> ลบ
+                        </button>
+                      </div>
                     </article>
                   ))}
                 </div>
@@ -833,9 +914,18 @@ function Admin() {
                         <span>{project.title} · {project.category || "RESIDENTIAL"} · ลำดับ {project.order || 1}</span>
                         <p>{project.desc || project.details}</p>
                       </div>
-                      <button type="button" className="outline-btn" onClick={() => handleEditPortfolio(project)}>
-                        <Edit3 size={16} /> แก้ไข
-                      </button>
+                      <div className="flex gap-2">
+                        <button type="button" className="outline-btn" onClick={() => handleEditPortfolio(project)}>
+                          <Edit3 size={16} /> แก้ไข
+                        </button>
+                        <button
+                          type="button"
+                          className="outline-btn text-red-400 border-red-500/20 hover:bg-red-500/10 hover:text-red-500"
+                          onClick={() => handleDeletePortfolio(project.id, project.thai)}
+                        >
+                          <Trash2 size={16} /> ลบ
+                        </button>
+                      </div>
                     </article>
                   ))}
                 </div>
@@ -904,9 +994,18 @@ function Admin() {
                         <span>{member.role} · ลำดับ {member.order || 1}</span>
                         <p>{member.isActive === false ? "ซ่อนจากหน้าเว็บ" : "แสดงบนหน้าเว็บ"}</p>
                       </div>
-                      <button type="button" className="outline-btn" onClick={() => handleEditTeam(member)}>
-                        <Edit3 size={16} /> แก้ไข
-                      </button>
+                      <div className="flex gap-2">
+                        <button type="button" className="outline-btn" onClick={() => handleEditTeam(member)}>
+                          <Edit3 size={16} /> แก้ไข
+                        </button>
+                        <button
+                          type="button"
+                          className="outline-btn text-red-400 border-red-500/20 hover:bg-red-500/10 hover:text-red-500"
+                          onClick={() => handleDeleteTeam(member.id, member.name)}
+                        >
+                          <Trash2 size={16} /> ลบ
+                        </button>
+                      </div>
                     </article>
                   ))}
                 </div>

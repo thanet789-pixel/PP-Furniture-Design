@@ -60,31 +60,30 @@ export const icons = {
 
 export const images = {
   kitchen:
-    "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=1800&q=85",
+    "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=1800&q=85",
   living:
     "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1800&q=85",
   media:
-    "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1800&q=85",
+    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85",
   closet:
     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1800&q=85",
   bedroom:
     "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=1800&q=85",
   office:
-    "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85",
+    "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1800&q=85",
   materials:
-    "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1800&q=85",
+    "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=85",
   workshop:
     "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=85",
   design:
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1800&q=85",
+    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=85",
   install:
-    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1800&q=85",
+    "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1800&q=85",
   cleaning:
     "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1800&q=85",
   map:
     "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1800&q=85",
-  team:
-    "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85",
+  team: "/images/team/outteam.png",
 };
 
 export const stats = [
@@ -102,12 +101,54 @@ export const values = [
 ];
 
 export const services = [
-  { icon: MessageCircle, title: "DESIGN & CONSULTATION", thai: "ให้คำปรึกษาและออกแบบ", desc: "รับฟังความต้องการ วิเคราะห์พื้นที่ และออกแบบตามสไตล์ของคุณ", image: images.design },
-  { icon: PenTool, title: "3D DESIGN", thai: "ออกแบบ 3 มิติ", desc: "ออกแบบภาพ 3D เสมือนจริง ให้เห็นภาพก่อนเริ่มผลิต", image: images.office },
-  { icon: PackageCheck, title: "BUILT-IN FURNITURE", thai: "ผลิตเฟอร์นิเจอร์บิวท์อิน", desc: "ผลิตด้วยวัสดุคุณภาพสูง แข็งแรง ทนทาน ใช้งานได้ยาวนาน", image: images.materials },
-  { icon: Truck, title: "DELIVERY & INSTALLATION", thai: "จัดส่งและติดตั้ง", desc: "ติดตั้งโดยทีมงานมืออาชีพ รวดเร็ว เรียบร้อย และตรงเวลา", image: images.install },
-  { icon: ClipboardCheck, title: "QUALITY INSPECTION", thai: "ตรวจสอบคุณภาพ", desc: "ตรวจสอบทุกขั้นตอน เพื่อให้งานเรียบร้อยและปลอดภัย", image: images.kitchen },
-  { icon: Headphones, title: "AFTER SERVICE", thai: "บริการหลังการขาย", desc: "รับประกันงานติดตั้งและดูแลหลังการขายอย่างต่อเนื่อง", image: images.media },
+  {
+    icon: MessageCircle,
+    title: "DESIGN & SPACE PLANNING",
+    thai: "ให้คำปรึกษาและวางผังพื้นที่",
+    desc: "วิเคราะห์พื้นที่ร่วมกับอินทีเรียร์ดีไซเนอร์มืออาชีพเพื่อสร้างสรรค์เลย์เอาต์ที่ผสานฟังก์ชันและการใช้สเปซอย่างมีระดับ",
+    details: "เริ่มต้นความฝันด้วยการรับคำปรึกษาจากอินทีเรียร์ดีไซเนอร์ผู้เชี่ยวชาญ เราทำการลงพื้นที่จริงเพื่อวัดขนาดวิเคราะห์แสงสว่าง ทิศทางลม และโครงสร้างห้องโดยละเอียด พร้อมร่วมสร้างสรรค์ Mood & Tone วางผังการใช้งาน (Space Planning) ให้ตอบโจทย์ไลฟ์สไตล์ของสมาชิกทุกคนในบ้าน เพื่อให้มั่นใจว่าพื้นที่ทุกตารางเมตรจะถูกใช้งานอย่างมีประสิทธิภาพสูงสุดและสะท้อนรสนิยมของคุณอย่างแท้จริง",
+    image: images.design,
+  },
+  {
+    icon: PenTool,
+    title: "3D VISUALIZATION & SPECIFICATION",
+    thai: "ออกแบบภาพ 3 มิติเสมือนจริง",
+    desc: "รังสรรค์ภาพ 3D เสมือนจริงความละเอียดสูงพร้อมระบุรายละเอียดวัสดุ ให้คุณสัมผัสบรรยากาศจริงก่อนเริ่มผลิตงานบิวท์อิน",
+    details: "ลดความคลาดเคลื่อนด้วยระบบการออกแบบภาพ 3D (Perspective Rendering) ที่แสดงมิติ แสง เงา และสีสันเสมือนจริงในพื้นที่ของคุณ เรานำเข้าโมเดลเฟอร์นิเจอร์จริงเพื่อให้คุณได้สัมผัสบรรยากาศห้องที่สมบูรณ์แบบ สามารถปรับเปลี่ยนโทนสี วัสดุปิดผิว หรือตำแหน่งการวางจนกว่าจะตรงใจ พร้อมระบุรายละเอียดของวัสดุ (Material Specification) ทุกชิ้นอย่างชัดเจนก่อนเข้าสู่ขั้นตอนการผลิตชิ้นงานจริง",
+    image: images.office,
+  },
+  {
+    icon: PackageCheck,
+    title: "PREMIUM CUSTOM FABRICATION",
+    thai: "ผลิตเฟอร์นิเจอร์บิวท์อินคุณภาพพรีเมียม",
+    desc: "ผลิตชิ้นงานด้วยเทคโนโลยีที่ได้มาตรฐานและวัสดุเกรดพรีเมียมกันชื้น โครงสร้างแข็งแกร่ง ทนทาน และประณีตทุกรายละเอียด",
+    details: "เฟอร์นิเจอร์บิวท์อินทุกชิ้นผลิตขึ้นที่โรงงานของเราด้วยเครื่องจักรระบบอุตสาหกรรมที่ได้มาตรฐานสูงและช่างฝีมือผู้ชำนาญการ เราคัดสรรเฉพาะวัสดุโครงสร้างระดับพรีเมียม เช่น ไม้อัดยางกันชื้น (HMR) เกรดส่งออก รองรับการใช้งานหนักและป้องกันปลวก มอด แมลง ปิดผิวด้วยแผ่นลามิเนตนำเข้า วีเนียร์ไม้แท้ หรือสีพ่นไฮกลอสระดับไฮเอนด์ ผสานอุปกรณ์บานพับและรางลิ้นชักระบบ Soft-Close จากแบรนด์ชั้นนำระดับโลกอย่าง Blum หรือ Hafele",
+    image: images.materials,
+  },
+  {
+    icon: Truck,
+    title: "EXPERT LOGISTICS & INSTALLATION",
+    thai: "จัดส่งและติดตั้งโดยทีมช่างชำนาญการ",
+    desc: "ขนส่งด้วยระบบป้องกันการกระแทกและติดตั้งหน้างานโดยทีมช่างเทคนิคมืออาชีพ รวดเร็ว ปลอดภัย และไร้ฝุ่นตกค้าง",
+    details: "ขั้นตอนการติดตั้งหน้างานได้รับการวางแผนระบบอย่างเป็นสัดส่วนเพื่อรบกวนความเป็นอยู่ของคุณน้อยที่สุด ชิ้นงานที่ผลิตเสร็จแบบกึ่งสำเร็จรูป (Semi-knockdown) จากโรงงานจะถูกขนส่งอย่างทะนุถนอมด้วยรถขนส่งเฉพาะงานเฟอร์นิเจอร์ และนำมาประกอบติดตั้งโดยทีมช่างผู้ชำนาญการที่มีประสบการณ์สูง มีระบบการป้องกันรอยขีดข่วนบนพื้นผิวและผนังของบ้านคุณอย่างดีเยี่ยม พร้อมทั้งจัดการทำความสะอาดพื้นที่ (Post-installation Cleanup) ให้เรียบร้อย ไร้ฝุ่นละอองตกค้าง พร้อมใช้งานทันที",
+    image: images.install,
+  },
+  {
+    icon: ClipboardCheck,
+    title: "RIGOROUS QUALITY ASSURANCE",
+    thai: "ควบคุมและตรวจสอบคุณภาพอย่างเข้มงวด",
+    desc: "ตรวจสอบความเรียบร้อยของชิ้นงาน ทุกรอยต่อ ผิวสัมผัส และระบบบานพับอย่างละเอียดก่อนส่งมอบงานระดับ Masterpiece",
+    details: "เพื่อให้มั่นใจว่าผลงานทุกชิ้นมีมาตรฐานสูงสุดระดับแบรนด์ลักชัวรี เราจึงมีวิศวกรและผู้ควบคุมงาน (Site Supervisor) คอยตรวจสอบความถูกต้องตลอดขั้นตอนการติดตั้ง ตรวจวัดความเรียบเนียนของรอยต่อ (Seamless Joint) การทำงานของระบบกลไกฟังก์ชัน ลิ้นชัก และหน้าบานตู้ทุกบาน รวมถึงความเรียบร้อยของสีและการปิดผิวอย่างละเอียดผ่าน Checklist มาตรฐานสากลกว่า 50 รายการ ก่อนที่จะทำการส่งมอบงานให้แก่ลูกค้า",
+    image: images.kitchen,
+  },
+  {
+    icon: Headphones,
+    title: "ELITE WARRANTY & LIFETIME SUPPORT",
+    thai: "การรับประกันระดับพรีเมียมและบริการหลังการขาย",
+    desc: "อุ่นใจด้วยการรับประกันโครงสร้างและงานติดตั้ง พร้อมทีมงานคอลเซ็นเตอร์คอยให้คำปรึกษาดูแลตลอดการใช้งาน",
+    details: "ความสัมพันธ์ของเราไม่สิ้นสุดลงในวันส่งมอบงาน PP HOME FURNITURE ขอมอบการรับประกันคุณภาพโครงสร้างและอุปกรณ์ฟิตติ้งนานสูงสุดถึง 1 ปีเต็ม พร้อมทีมช่างเคลื่อนที่เร็ว (Mobile Service) เข้าดูแลซ่อมบำรุงกรณีเกิดปัญหาจากการใช้งานอย่างรวดเร็วภายใน 48 ชั่วโมง นอกจากนี้ เรายังมีระบบสมาชิกสัมพันธ์ที่ยินดีให้คำปรึกษา แนะนำวิธีการดูแลรักษาเนื้อไม้ วัสดุปิดผิว และอุปกรณ์สแตนเลสต่างๆ เพื่อให้เฟอร์นิเจอร์บิวท์อินของคุณคงความสวยงามหรูหราคู่บ้านไปอีกยาวนานแสนนาน",
+    image: images.media,
+  },
 ];
 
 export const processSteps = [
