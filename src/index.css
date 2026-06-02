@@ -3362,6 +3362,19 @@ p {
     align-items: flex-start;
     flex-direction: column;
   }
+
+  .cta-banner.wide {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+    gap: 24px;
+  }
+
+  .cta-points {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -3593,6 +3606,16 @@ p {
   .footer-bottom {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .filter-row div {
+    width: 100%;
+  }
+
+  .portfolio-panel,
+  .blog-panel {
+    padding: 16px;
+    margin-top: 24px;
   }
 
   .admin-page {

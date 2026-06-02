@@ -29,7 +29,7 @@ function Footer() {
             รับออกแบบ ผลิต และติดตั้งเฟอร์นิเจอร์บิวท์อินครบวงจร ด้วยดีไซน์ทันสมัยและงานคุณภาพ
           </p>
           <div className="social-row">
-            <a href="https://line.me/R/ti/p/@ppfurniture" target="_blank" rel="noreferrer" aria-label="LINE @ppfurniture">
+            <a href="https://line.me/ti/p/~0880904970" target="_blank" rel="noreferrer" aria-label="LINE 088-090-4970">
               <MessageCircle size={17} />
             </a>
             <Facebook size={17} />
@@ -54,8 +54,8 @@ function Footer() {
           <div className="contact-list">
             <a href="tel:0880904970"><Phone size={16} /> 088-090-4970</a>
             <a href="mailto:permphun@gmail.com"><Mail size={16} /> permphun@gmail.com</a>
-            <a href="https://line.me/R/ti/p/@ppfurniture" target="_blank" rel="noreferrer">
-              <MessageCircle size={16} /> @ppfurniture
+            <a href="https://line.me/ti/p/~0880904970" target="_blank" rel="noreferrer">
+              <MessageCircle size={16} /> 088-090-4970
             </a>
             <a href={mapUrl} target="_blank" rel="noreferrer">
               <MapPin size={16} />

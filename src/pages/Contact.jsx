@@ -63,7 +63,7 @@ function Contact() {
   const contactMethods = [
     { icon: Phone, label: "PHONE", value: "088-090-4970", href: "tel:0880904970", action: "โทรหาเรา" },
     { icon: Mail, label: "EMAIL", value: "permphun@gmail.com", href: "mailto:permphun@gmail.com", action: "ส่งอีเมล" },
-    { icon: MessageCircle, label: "LINE OFFICIAL", value: "@ppfurniture", href: "https://line.me/R/ti/p/@ppfurniture", action: "เปิด LINE", external: true },
+    { icon: MessageCircle, label: "LINE OFFICIAL", value: "088-090-4970", href: "https://line.me/ti/p/~0880904970", action: "เปิด LINE", external: true },
   ];
 
   const serviceHighlights = [
@@ -177,10 +177,10 @@ function Contact() {
             <h2>THANK YOU<br />FOR YOUR INTEREST</h2>
             <p>ขอบคุณที่ให้ความไว้วางใจในสินค้าและบริการของเรา</p>
           </div>
-          <a href="https://line.me/R/ti/p/@ppfurniture" target="_blank" rel="noreferrer" className="line-chat-card">
+          <a href="https://line.me/ti/p/~0880904970" target="_blank" rel="noreferrer" className="line-chat-card">
             <MessageCircle size={34} />
             <strong>SCAN TO CHAT</strong>
-            <p>ติดต่อเราได้ง่าย ๆ ผ่าน LINE @ppfurniture</p>
+            <p>ติดต่อเราได้ง่าย ๆ ผ่าน LINE 088-090-4970</p>
           </a>
           <div className="question-card">
             <Headphones size={42} />
